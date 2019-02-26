@@ -5,13 +5,28 @@ import Col from 'react-bootstrap/Col';
 
 import PropTypes from 'prop-types';
 
+import {connect} from 'react-redux'
+
 class BillsTable extends React.Component {
     constructor(props) {
         super(props);
         
     }
 
+    
+
     render() {
+        const tableRow = this.props.bill.map((bill,index)=>{
+            var index = index + 1 
+            return(
+                <tr>
+                    <td key={index}>{index}</td>
+                    <td key={index}>{bill.billName}</td>
+                    <td key={index}>${bill.billAmount}</td>
+                    <td key={index}>{bill.billDueDate}</td>
+                </tr>
+            )
+        })
         return (
             <Row>
                 <Col md={{span: 10, offset: 1}} >
@@ -25,24 +40,7 @@ class BillsTable extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Netflix</td>
-                            <td>$12.00</td>
-                            <td>03/12</td>
-                            </tr>
-                            <tr>
-                            <td>2</td>
-                            <td>Groceries</td>
-                            <td>$50.00</td>
-                            <td>03/01</td>
-                            </tr>
-                            <tr>
-                            <td>3</td>
-                            <td>Rent</td>
-                            <td>$500.00</td>
-                            <td>03/15</td>
-                            </tr>
+                            {tableRow}
                         </tbody>
                     </Table>
                 </Col>
@@ -51,9 +49,18 @@ class BillsTable extends React.Component {
     }
 }
 
+function mapStateToProps(state){
+    console.log(state.userInputsReducer.billsList)
+    return {
+        bill: state.userInputsReducer.billsList
+    }
+}
+
 
 BillsTable.propTypes = {
     
 };
 
-export default BillsTable
+export default connect(mapStateToProps,null)(BillsTable)
+
+

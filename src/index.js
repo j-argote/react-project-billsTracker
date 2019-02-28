@@ -5,8 +5,10 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 
+//reducer import
 import rootReducer from './reducers/rootReducer'
 
+//component imports
 import BaseLayout from './components/BaseLayout';
 import App from './App';
 import ExpenseTracker from './components/ExpenseTracker'

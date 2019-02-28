@@ -2,21 +2,26 @@ export const ADDBILL = 'ADDBILL'
 export const DELETEBILL = 'DELETEBILL'
 export const DELETECHART = 'DELETECHART'
 
-export const addBill = (billCategory, billName, billAmount, billDueDate) => ({
+export const addBill = (item) => ({
     type: ADDBILL,
     billData: {
-        billCategory,
-        billName,
-        billAmount,
-        billDueDate
+        billCategory: item.billCategory,
+        billName: item.billName,
+        billAmount: item.billAmount,
+        billDueDate: item.billDueDate
     }
 })
 
-export const deleteBill = (billName) =>({
+export const deleteBill = (item) =>({
     type: DELETEBILL,
-    billName
+    billData:{
+        billCategory: item.billCategory,
+        billName: item.billName,
+        billAmount: item.billAmount,
+        billDueDate: item.billDueDate
+    }
 })
 
-export const deleteChart = () => ({
-    type: DELETECHART
-})
+// export const deleteChart = () => ({
+//     type: DELETECHART
+// })

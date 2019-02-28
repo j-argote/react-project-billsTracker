@@ -1,13 +1,13 @@
-import {ADDBILL} from '../actions/userInputsAction';
+import {ADDBILL, DELETEBILL} from '../actions/userInputsAction';
 
 const initialState = {
     billsList: [
-        {
-            billCategory: "Rent",
-            billName: "reliant",
-            billAmount: 30,
-            billDueDate: "01/23"
-        }
+        // {
+        //     billCategory: "Rent",
+        //     billName: "reliant",
+        //     billAmount: 30,
+        //     billDueDate: "01/23"
+        // }
     ]
 }
 
@@ -25,6 +25,16 @@ function userInputsReducer(state = initialState, action){
                     billAmount: parseFloat(action.billData.billAmount).toFixed(2),
                     billDueDate: action.billData.billDueDate
                 })
+            }
+        case DELETEBILL:
+            const updatedArray = state.billsList.filter((bill)=>{
+                // console.log(bill.billName)
+                console.log(action.billsList)
+                return bill.billName !== action.billData.billName
+            })
+            return {
+                ...state,
+                billsList: updatedArray
             }
         default:
             return state

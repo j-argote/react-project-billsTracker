@@ -1,6 +1,6 @@
 import React from 'react';
 import UserInputs from './components/UserInputs';
-import BillsTable from './components/BillsTable';
+// import BillsTable from './components/BillsTable';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div>
         <UserInputs />
-        <BillsTable />
+        {/* <BillsTable /> */}
       </div>
     );
   }

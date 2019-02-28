@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux'
+import {deleteBill, addBill} from '../actions/userInputsAction'
 
 class BillsTable extends React.Component {
     constructor(props) {
@@ -13,21 +14,21 @@ class BillsTable extends React.Component {
         
     }
 
-    
-
     render() {
-        const tableRow = this.props.bill.map((bill,index)=>{
+        const tableRow = this.props.billsList.map((billData,index)=>{
             var index = index + 1 
             return(
-                <tr>
-                    <td key={index}>{index}</td>
-                    <td key={index}>{bill.billName}</td>
-                    <td key={index}>${bill.billAmount}</td>
-                    <td key={index}>{bill.billDueDate}</td>
+                <tr key={index}>
+                    <td>{index}</td>
+                    <td>{billData.billName}</td>
+                    <td>${billData.billAmount}</td>
+                    <td>{billData.billDueDate}</td>
+                    <td><button onClick={this.props.deleteBill}>Delete</button></td>
                 </tr>
             )
         })
         return (
+            <div>
             <Row>
                 <Col md={{span: 10, offset: 1}} >
                     <Table size="sm" striped bordered hover>
@@ -37,6 +38,7 @@ class BillsTable extends React.Component {
                             <th>Name</th>
                             <th>Amount</th>
                             <th>Due Date</th>
+                            <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,14 +47,21 @@ class BillsTable extends React.Component {
                     </Table>
                 </Col>
             </Row>
+            </div>
         );
     }
 }
 
 function mapStateToProps(state){
-    console.log(state.userInputsReducer.billsList)
+    // console.log(state.userInputsReducer.billsList)
     return {
-        bill: state.userInputsReducer.billsList
+        billsList: state.userInputsReducer.billsList
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        onDeleteBill: (billData) => dispatch(deleteBill(billData))
     }
 }
 
@@ -61,6 +70,6 @@ BillsTable.propTypes = {
     
 };
 
-export default connect(mapStateToProps,null)(BillsTable)
+export default connect(mapStateToProps,mapDispatchToProps)(BillsTable)
 
 
